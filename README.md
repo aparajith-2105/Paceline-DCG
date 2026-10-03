@@ -4,11 +4,11 @@ A modern e-commerce web application built with **HTML, CSS, and JavaScript**, fe
 
 ## 🚀 Overview
 
-**Paceline** is a front-end e-commerce project designed for a DCG club recruitment and a model of the home page and the about page was given already where i made many additions like interactive buttons and changed the images.
+**Paceline** is a front-end e-commerce project designed as **DCG Frontend task submission** and a model of the home page and the about page was given already where i made some additions to it like interactive buttons and some more products.
 
 The project includes product browsing, cart management, checkout, payment selection, persistent order history, order tracking, cancellation, and return/exchange functionality.
 
-**Live Demo**:https://vercel.com/aparajith/paceline/2tqspGDGUePskQwb9kvJeWtvbpyy
+**Live Demo**:https://paceline-neon.vercel.app/
 
 ## ✨ Features
 
