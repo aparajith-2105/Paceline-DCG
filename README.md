@@ -8,7 +8,7 @@ A modern e-commerce web application built with **HTML, CSS, and JavaScript**, fe
 
 The project includes product browsing, cart management, checkout, payment selection, persistent order history, order tracking, cancellation, and return/exchange functionality.
 
-**Live Demo**:
+**Live Demo**:https://vercel.com/aparajith/paceline/2tqspGDGUePskQwb9kvJeWtvbpyy
 
 ## ✨ Features
 
