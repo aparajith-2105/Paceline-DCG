@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brands— Paceline</title>
+  <title>My Basket — Paceline</title>
   <meta name="description" content="Running shoes and kit for men, hand-picked by the Paceline team in Glasgow.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body data-page="brands">
+<body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
@@ -31,12 +31,12 @@
   <div class="wrap">
     <a href="index.html" class="logo" aria-label="Paceline home">PACELINE</a>
     <nav class="nav" id="nav" aria-label="Main">
-      <a href="index.html">Home</a>
+      <a href="index.html">Home</a>  
       <a href="men.html">Men</a>
       <a href="women.html">Women</a>
       <a href="footwear.html">Footwear</a>
       <a href="apparel.html">Apparel</a>
-      <a href="brands.html" aria-current="page">Brands</a>
+      <a href="brands.html">Brands</a>
       <a href="accessories.html">Accessories</a>
       <a href="sale.html">Sale</a>
       <a href="about.html">About</a>
@@ -53,28 +53,47 @@
 <main>
   <section class="page-head">
     <div class="wrap">
-      <p class="crumbs"><a href="index.html">Home</a> &nbsp;/&nbsp; Brands</p>
-      <h1>Brands</h1>
-      <p class="sub">Every brand we stock. Pick one to see what we have in store.</p>
+      <p class="crumbs"><a href="index.html">Home</a> &nbsp;/&nbsp; Basket</p>
+      <h1>Your basket</h1>
+      <p class="sub">Everything you’ve saved with the heart. Free UK delivery over £75 and 30-day returns.</p>
     </div>
   </section>
 
   <section class="shop-section">
     <div class="wrap">
-      <div class="shop-bar">
-        <div class="chips" id="brandChips" role="group" aria-label="Filter by brand"></div>
-        <div class="shop-tools">
-          <span id="resultCount" role="status"></span>
-          <label class="sr-only" for="sortSelect">Sort by</label>
-          <select id="sortSelect">
-            <option value="featured">Featured</option>
-            <option value="low">Price: low to high</option>
-            <option value="high">Price: high to low</option>
-            <option value="az">Name: A to Z</option>
-          </select>
+
+      <div class="cart-grid" id="cartGrid">
+        <div>
+          <div id="cartList"></div>
+          <button type="button" class="link-btn cart-clear" id="clearCart">Clear basket</button>
         </div>
+
+        <aside class="cart-summary" aria-label="Order summary">
+          <h2>Summary</h2>
+          <div class="sum-row"><span>Subtotal</span><b id="sumSub">£0</b></div>
+          <div class="sum-row"><span>Delivery</span><b id="sumShip">£0</b></div>
+          <div class="sum-total"><span>Total</span><span id="sumTotal">£0</span></div>
+
+          <p class="ship-msg" id="shipMsg"></p>
+          <div class="ship-bar" aria-hidden="true"><i id="shipBar"></i></div>
+
+          <button type="button" class="btn btn-dark" id="checkoutBtn">Checkout</button>
+          <p class="cart-note" id="cartNote" role="status"></p>
+
+          <ul class="ship-info">
+            <li><b>Free UK delivery</b> on orders over £75, otherwise £4.95</li>
+            <li><b>Standard delivery</b> in 2–4 working days</li>
+            <li><b>30-day returns</b> on unworn shoes and kit</li>
+          </ul>
+        </aside>
       </div>
-      <div class="product-grid" id="shopGrid"></div>
+
+      <div class="cart-empty" id="cartEmpty" hidden>
+        <h2>Your basket is empty.</h2>
+        <p>Tap the heart on any product to save it here.</p>
+        <a class="btn btn-dark" href="footwear.html">Shop footwear</a>
+      </div>
+
     </div>
   </section>
 </main>
@@ -115,6 +134,6 @@
 <script src="js/main.js"></script>
 <script src="js/store.js"></script>
 <script src="js/search.js"></script>
-<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
 </body>
 </html>

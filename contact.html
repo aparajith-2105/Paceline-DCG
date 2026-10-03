@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brands— Paceline</title>
+  <title>Contact — Paceline</title>
   <meta name="description" content="Running shoes and kit for men, hand-picked by the Paceline team in Glasgow.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body data-page="brands">
+<body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
@@ -31,12 +31,12 @@
   <div class="wrap">
     <a href="index.html" class="logo" aria-label="Paceline home">PACELINE</a>
     <nav class="nav" id="nav" aria-label="Main">
-      <a href="index.html">Home</a>
+      <a href="index.html">Home</a>  
       <a href="men.html">Men</a>
       <a href="women.html">Women</a>
       <a href="footwear.html">Footwear</a>
       <a href="apparel.html">Apparel</a>
-      <a href="brands.html" aria-current="page">Brands</a>
+      <a href="brands.html">Brands</a>
       <a href="accessories.html">Accessories</a>
       <a href="sale.html">Sale</a>
       <a href="about.html">About</a>
@@ -53,28 +53,81 @@
 <main>
   <section class="page-head">
     <div class="wrap">
-      <p class="crumbs"><a href="index.html">Home</a> &nbsp;/&nbsp; Brands</p>
-      <h1>Brands</h1>
-      <p class="sub">Every brand we stock. Pick one to see what we have in store.</p>
+      <p class="crumbs"><a href="index.html">Home</a> &nbsp;/&nbsp; Contact</p>
+      <h1>Contact</h1>
+      <p class="sub">Questions about sizing, an order or a pair you’re eyeing? Message us, or pop into the shop.</p>
     </div>
   </section>
 
-  <section class="shop-section">
-    <div class="wrap">
-      <div class="shop-bar">
-        <div class="chips" id="brandChips" role="group" aria-label="Filter by brand"></div>
-        <div class="shop-tools">
-          <span id="resultCount" role="status"></span>
-          <label class="sr-only" for="sortSelect">Sort by</label>
-          <select id="sortSelect">
-            <option value="featured">Featured</option>
-            <option value="low">Price: low to high</option>
-            <option value="high">Price: high to low</option>
-            <option value="az">Name: A to Z</option>
-          </select>
+  <section class="gait-section">
+    <div class="wrap gait-grid">
+
+      <div class="gait-info">
+        <h2>Visit the shop</h2>
+        <address class="gait-where" style="margin-bottom:40px"><b>Paceline Running Co.</b><br>Great Western Road, Glasgow</address>
+
+        <h2>Opening hours</h2>
+        <dl class="hours">
+          <div><dt>Monday – Friday</dt><dd>10:00 – 18:00</dd></div>
+          <div><dt>Saturday</dt><dd>09:00 – 17:00</dd></div>
+          <div><dt>Sunday</dt><dd>11:00 – 16:00</dd></div>
+        </dl>
+
+        <h2>Get in touch</h2>
+        <p class="contact-lines">
+          Phone: <a href="tel:+441410000000">0141 000 0000</a><br>
+          Email: <a href="mailto:hello@paceline.example">hello@paceline.example</a><br>
+          Want a gait analysis? <a href="gait-analysis.html">Book a Saturday slot</a>
+        </p>
+      </div>
+
+      <div class="gait-card">
+        <h2>Send us a message</h2>
+
+        <form id="contactForm" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="cName">Full name</label>
+              <input id="cName" type="text" autocomplete="name">
+              <p class="err">Enter your name.</p>
+            </div>
+            <div class="field">
+              <label for="cEmail">Email</label>
+              <input id="cEmail" type="email" autocomplete="email">
+              <p class="err">Enter a valid email address.</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="cTopic">What is it about?</label>
+            <select id="cTopic">
+              <option>Order help</option>
+              <option>Sizing and fit</option>
+              <option>Returns</option>
+              <option>Gait analysis</option>
+              <option>Wholesale</option>
+              <option>Something else</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="cMessage">Message</label>
+            <textarea id="cMessage"></textarea>
+            <p class="err">Write at least a short sentence so we can help.</p>
+          </div>
+
+          <button type="submit" class="btn btn-dark">Send message</button>
+          <p class="gait-note">We reply within one working day.</p>
+        </form>
+
+        <div class="gait-done" id="contactDone" role="status">
+          <div class="tick"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+          <h2>Message sent, <span id="contactName"></span>.</h2>
+          <p>We’ll reply to <b id="contactEmail"></b> within one working day.</p>
+          <p style="margin-top:22px"><button type="button" class="btn btn-ink-outline" id="sendAnother">Send another message</button></p>
         </div>
       </div>
-      <div class="product-grid" id="shopGrid"></div>
+
     </div>
   </section>
 </main>
@@ -115,6 +168,6 @@
 <script src="js/main.js"></script>
 <script src="js/store.js"></script>
 <script src="js/search.js"></script>
-<script src="js/products.js"></script>
+<script src="js/contact.js"></script>
 </body>
 </html>

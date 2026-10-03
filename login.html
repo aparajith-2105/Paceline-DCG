@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brands— Paceline</title>
+  <title>Sign in— Paceline</title>
   <meta name="description" content="Running shoes and kit for men, hand-picked by the Paceline team in Glasgow.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body data-page="brands">
+<body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
@@ -31,12 +31,12 @@
   <div class="wrap">
     <a href="index.html" class="logo" aria-label="Paceline home">PACELINE</a>
     <nav class="nav" id="nav" aria-label="Main">
-      <a href="index.html">Home</a>
+      <a href="index.html">Home</a>  
       <a href="men.html">Men</a>
       <a href="women.html">Women</a>
       <a href="footwear.html">Footwear</a>
       <a href="apparel.html">Apparel</a>
-      <a href="brands.html" aria-current="page">Brands</a>
+      <a href="brands.html">Brands</a>
       <a href="accessories.html">Accessories</a>
       <a href="sale.html">Sale</a>
       <a href="about.html">About</a>
@@ -51,30 +51,96 @@
 </header>
 
 <main>
-  <section class="page-head">
-    <div class="wrap">
-      <p class="crumbs"><a href="index.html">Home</a> &nbsp;/&nbsp; Brands</p>
-      <h1>Brands</h1>
-      <p class="sub">Every brand we stock. Pick one to see what we have in store.</p>
+  <section class="auth">
+    <div class="auth-side on-dark">
+      <p class="eyebrow">Paceline club</p>
+      <h1>Your next run starts here.</h1>
+      <ul class="auth-perks">
+        <li>10% off your first order</li>
+        <li>Early access to new drops</li>
+        <li>Save favourites and track your orders</li>
+      </ul>
     </div>
-  </section>
 
-  <section class="shop-section">
-    <div class="wrap">
-      <div class="shop-bar">
-        <div class="chips" id="brandChips" role="group" aria-label="Filter by brand"></div>
-        <div class="shop-tools">
-          <span id="resultCount" role="status"></span>
-          <label class="sr-only" for="sortSelect">Sort by</label>
-          <select id="sortSelect">
-            <option value="featured">Featured</option>
-            <option value="low">Price: low to high</option>
-            <option value="high">Price: high to low</option>
-            <option value="az">Name: A to Z</option>
-          </select>
+    <div class="auth-main">
+      <div class="auth-card">
+
+        <div class="auth-tabs" id="authTabs" role="tablist" aria-label="Account">
+          <button type="button" role="tab" id="tab-signin" aria-selected="true" aria-controls="panel-signin">Sign in</button>
+          <button type="button" role="tab" id="tab-signup" aria-selected="false" aria-controls="panel-signup" tabindex="-1">Create account</button>
         </div>
+
+        <!-- Sign in -->
+        <form id="panel-signin" role="tabpanel" aria-labelledby="tab-signin" novalidate>
+          <div class="field">
+            <label for="siEmail">Email</label>
+            <input id="siEmail" type="email" autocomplete="email">
+            <p class="err">Enter a valid email address.</p>
+          </div>
+          <div class="field">
+            <label for="siPass">Password</label>
+            <div class="pw">
+              <input id="siPass" type="password" autocomplete="current-password">
+              <button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false">Show</button>
+            </div>
+            <p class="err">Enter your password.</p>
+          </div>
+          <div class="auth-row">
+            <label class="check"><input type="checkbox"> Keep me signed in</label>
+            <button type="button" class="link-btn" id="forgotLink">Forgot password?</button>
+          </div>
+          <button type="submit" class="btn btn-dark">Sign in</button>
+        </form>
+
+        <!-- Create account -->
+        <form id="panel-signup" role="tabpanel" aria-labelledby="tab-signup" novalidate hidden>
+          <div class="field">
+            <label for="suName">Full name</label>
+            <input id="suName" type="text" autocomplete="name">
+            <p class="err">Enter your name.</p>
+          </div>
+          <div class="field">
+            <label for="suEmail">Email</label>
+            <input id="suEmail" type="email" autocomplete="email">
+            <p class="err">Enter a valid email address.</p>
+          </div>
+          <div class="field">
+            <label for="suPass">Password</label>
+            <div class="pw">
+              <input id="suPass" type="password" autocomplete="new-password">
+              <button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false">Show</button>
+            </div>
+            <p class="hint">At least 8 characters.</p>
+            <p class="err">Use at least 8 characters.</p>
+          </div>
+          <div class="auth-row">
+            <label class="check"><input type="checkbox"> Send me early access to new drops and 10% off my first order</label>
+          </div>
+          <button type="submit" class="btn btn-dark">Create account</button>
+        </form>
+
+        <!-- Forgot password -->
+        <form id="panel-reset" novalidate hidden>
+          <h2>Reset your password</h2>
+          <p class="lede">Enter your email and we’ll send you a link to choose a new password.</p>
+          <div class="field">
+            <label for="rsEmail">Email</label>
+            <input id="rsEmail" type="email" autocomplete="email">
+            <p class="err">Enter a valid email address.</p>
+          </div>
+          <button type="submit" class="btn btn-dark">Send reset link</button>
+          <button type="button" class="btn btn-ink-outline" id="backToSignin">Back to sign in</button>
+        </form>
+
+        <!-- Success message (shared) -->
+        <div class="gait-done" id="authDone" role="status">
+          <div class="tick"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+          <h2 id="doneTitle"></h2>
+          <p id="doneText"></p>
+          <p style="margin-top:22px"><a class="btn btn-dark" href="index.html">Continue shopping</a></p>
+        </div>
+
       </div>
-      <div class="product-grid" id="shopGrid"></div>
     </div>
   </section>
 </main>
@@ -115,6 +181,6 @@
 <script src="js/main.js"></script>
 <script src="js/store.js"></script>
 <script src="js/search.js"></script>
-<script src="js/products.js"></script>
+<script src="js/login.js"></script>
 </body>
 </html>
