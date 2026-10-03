@@ -48,7 +48,7 @@
           '<form class="search-box" role="search" id="searchForm">' +
             '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>' +
             '<label class="sr-only" for="searchInput">Search products</label>' +
-            '<input id="searchInput" type="search" placeholder="Search shoes, brands, kit…" autocomplete="off">' +
+            '<input id="searchInput" type="search" autocomplete="off">' +
             '<button type="button" class="search-close" data-close>Close</button>' +
           '</form>' +
           '<div class="search-chips" id="searchChips"><span class="label">Popular</span>' +

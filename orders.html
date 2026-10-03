@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en-GB">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>My Orders — Paceline</title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+
+    .orders-section {
+      padding: 64px 0 90px;
+    }
+
+    .order-card {
+      background: var(--cream-light);
+      border: 1px solid var(--line);
+      margin-bottom: 24px;
+      padding: 28px;
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .order-id {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .order-date {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .order-status {
+      background: var(--lime);
+      color: var(--ink);
+      padding: 6px 10px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .order-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .order-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+    }
+
+    .order-item-name {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .order-item-brand {
+      color: var(--muted);
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+
+    .order-item-meta {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .order-item-price {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .order-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 20px;
+    }
+
+    .order-payment {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .order-total {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .orders-empty {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .orders-empty h2 {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .orders-empty p {
+      color: var(--muted);
+      margin-bottom: 25px;
+    }
+
+    .order-success {
+      background: var(--ink);
+      color: var(--white);
+      padding: 22px 26px;
+      margin-bottom: 30px;
+    }
+
+    .order-success strong {
+      color: var(--lime);
+    }
+
+    @media (max-width: 600px) {
+
+      .order-card {
+        padding: 20px;
+      }
+
+      .order-header,
+      .order-bottom {
+        flex-direction: column;
+      }
+
+      .order-item {
+        grid-template-columns: 64px 1fr;
+      }
+
+      .order-item img {
+        width: 64px;
+        height: 64px;
+      }
+
+      .order-item-price {
+        grid-column: 2;
+      }
+
+    }
+    /* =========================================================
+   ORDER TRACKER
+   ========================================================= */
+
+.order-tracker-section {
+  padding: 24px 0 10px;
+}
+
+.order-tracker-section h3,
+.order-products h3 {
+  font-size: 13px;
+  margin-bottom: 22px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.tracking-wrapper {
+  position: relative;
+  padding: 0 5px;
+}
+
+.tracking-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  position: relative;
+  z-index: 2;
+}
+
+.tracking-line {
+  position: absolute;
+  top: 12px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: var(--line);
+  z-index: 1;
+}
+
+.tracking-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.25;
+}
+
+.tracking-dot {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--cream-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.tracking-step.completed {
+  color: var(--ink);
+}
+
+.tracking-step.completed .tracking-dot,
+.tracking-step.active .tracking-dot {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
+}
+
+.tracking-step.active {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   CANCELLED
+   ========================================================= */
+
+.order-cancelled {
+  margin: 24px 0 5px;
+  padding: 15px 18px;
+  border: 1px solid var(--line);
+  font-weight: 700;
+}
+
+.order-cancelled span {
+  margin-right: 8px;
+}
+
+
+/* =========================================================
+   ORDER ACTIONS
+   ========================================================= */
+
+.order-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 22px;
+}
+
+.order-action-btn {
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  padding: 11px 18px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.order-action-btn:hover {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.return-btn {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.return-btn:hover {
+  opacity: .82;
+}
+
+.cancelled-label {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   RETURN / EXCHANGE MODAL
+   ========================================================= */
+
+.return-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .58);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+}
+
+.return-modal {
+  width: min(500px, 100%);
+  background: var(--cream-light);
+  color: var(--ink);
+  padding: 32px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .25);
+}
+
+.return-modal-close {
+  position: absolute;
+  right: 18px;
+  top: 14px;
+  border: 0;
+  background: transparent;
+  font-size: 27px;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.return-modal-kicker {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  margin-bottom: 8px;
+  color: var(--muted);
+}
+
+.return-modal h2 {
+  font-size: 27px;
+  margin-bottom: 8px;
+}
+
+.return-modal-description {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.return-type-options {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.return-type {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  background: var(--white);
+}
+
+.return-type.selected {
+  border-color: var(--ink);
+}
+
+.return-type input {
+  accent-color: var(--ink);
+}
+
+.return-type span {
+  display: grid;
+  gap: 4px;
+}
+
+.return-type strong {
+  font-size: 13px;
+}
+
+.return-type small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.return-reason-label {
+  display: grid;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.return-reason-label select {
+  padding: 13px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  font: inherit;
+  color: var(--ink);
+}
+
+.return-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.return-cancel-btn,
+.return-submit-btn {
+  padding: 12px 19px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.return-cancel-btn {
+  background: transparent;
+  border: 1px solid var(--line);
+}
+
+.return-submit-btn {
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  color: var(--white);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .tracking-steps {
+    grid-template-columns: repeat(5, minmax(55px, 1fr));
+  }
+
+  .tracking-step {
+    font-size: 8px;
+  }
+
+  .tracking-dot {
+    width: 22px;
+    height: 22px;
+    font-size: 9px;
+  }
+
+  .tracking-line {
+    top: 10px;
+  }
+
+  .order-actions {
+    justify-content: stretch;
+  }
+
+  .order-action-btn {
+    width: 100%;
+  }
+
+  .return-modal {
+    padding: 25px 20px;
+  }
+
+}
+.return-success-message {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  width: min(380px, calc(100% - 40px));
+  background: var(--ink);
+  color: var(--white);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transform: translateY(130%);
+  opacity: 0;
+  transition: .3s ease;
+  z-index: 10000;
+  box-shadow: 0 12px 35px rgba(0,0,0,.2);
+}
+
+.return-success-message.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.return-success-message strong {
+  color: var(--lime);
+  font-size: 13px;
+}
+
+.return-success-message span {
+  font-size: 12px;
+  color: rgba(255,255,255,.75);
+}
+/* Cancel confirmation modal */
+.cancel-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.25s ease;
+}
+
+.cancel-modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cancel-modal {
+  width: min(420px, 100%);
+  background: var(--white);
+  padding: 30px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  transform: translateY(20px) scale(0.97);
+  transition: 0.25s ease;
+}
+
+.cancel-modal-overlay.show .cancel-modal {
+  transform: translateY(0) scale(1);
+}
+
+.cancel-modal h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.cancel-modal p {
+  margin: 0 0 22px;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.cancel-modal-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.cancel-modal-actions button {
+  flex: 1;
+  padding: 12px 15px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.cancel-keep-btn {
+  background: #eee;
+  color: var(--ink);
+}
+
+.cancel-confirm-btn {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.cancel-confirm-btn:hover {
+  opacity: 0.85;
+}
+
+/* Cancellation success message */
+.cancel-success-message {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  width: min(380px, calc(100% - 40px));
+  background: var(--ink);
+  color: var(--white);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transform: translateY(130%);
+  opacity: 0;
+  transition: 0.3s ease;
+  z-index: 10000;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+.cancel-success-message.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.cancel-success-message strong {
+  color: var(--lime);
+  font-size: 13px;
+}
+
+.cancel-success-message span {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="topbar">
+
+    <div class="wrap">
+
+      <span>
+        Free UK delivery over £75
+        &nbsp;·&nbsp;
+        30-day returns
+      </span>
+
+      <span class="mid">
+        Autumn ’26 — new arrivals dropping weekly
+      </span>
+
+      <span>
+        Store: Glasgow &nbsp;·&nbsp; EN / £ GBP
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <header class="site-header">
+
+    <div class="wrap">
+
+      <a
+        href="index.html"
+        class="logo"
+      >
+        PACELINE
+      </a>
+
+
+      <nav
+        class="nav"
+        id="nav"
+        aria-label="Main"
+      >
+
+        <a href="index.html">Home</a>
+        <a href="men.html">Men</a>
+        <a href="women.html">Women</a>
+        <a href="footwear.html">Footwear</a>
+        <a href="apparel.html">Apparel</a>
+        <a href="brands.html">Brands</a>
+        <a href="accessories.html">Accessories</a>
+        <a href="sale.html">Sale</a>
+        <a href="about.html">About</a>
+        <a href="orders.html" aria-current="page">Orders</a>
+
+      </nav>
+
+
+      <div class="header-actions">
+
+        <a
+          href="cart.html"
+          class="icon-btn"
+          aria-label="Basket"
+        >
+          🛒
+        </a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <main>
+
+    <section class="page-head">
+
+      <div class="wrap">
+
+        <p class="crumbs">
+          <a href="index.html">Home</a>
+          &nbsp;/&nbsp;
+          Orders
+        </p>
+
+        <h1>My Orders</h1>
+
+        <p class="sub">
+          View your Paceline order history.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="orders-section">
+
+      <div class="wrap">
+
+        <div id="orderSuccess"></div>
+
+        <div id="ordersList"></div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script src="js/main.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/orders.js"></script>
+
+</body>
+
+</html>

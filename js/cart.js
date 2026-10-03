@@ -65,10 +65,16 @@
 
   document.getElementById('clearCart').addEventListener('click', function () { S.clear(); });
 
-  document.getElementById('checkoutBtn').addEventListener('click', function () {
-    // NOTE: connect your real checkout / payment provider here.
-    note.textContent = 'Checkout isn’t connected yet.';
-  });
+ document.getElementById('checkoutBtn').addEventListener('click', function () {
+  const items = S.get();
+
+  if (!items.length) {
+    note.textContent = 'Your basket is empty.';
+    return;
+  }
+
+  window.location.href = 'checkout.html';
+});
 
   window.addEventListener('basket:change', render);
   render();

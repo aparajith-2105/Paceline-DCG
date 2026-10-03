@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Checkout — Paceline</title>
+
+  <meta name="description" content="Complete your Paceline order.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    /* Checkout-only additions.
+       Existing Paceline styles remain unchanged. */
+
+    .checkout-section {
+      padding: 64px 0 90px;
+    }
+
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(300px, .8fr);
+      gap: 32px;
+      align-items: start;
+    }
+
+    .checkout-card {
+      background: var(--cream-light);
+      border: 1px solid var(--line);
+      padding: 30px;
+      margin-bottom: 20px;
+    }
+
+    .checkout-card h2 {
+      font-size: 22px;
+      margin-bottom: 24px;
+    }
+
+    .checkout-form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .checkout-field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .checkout-field label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .checkout-field input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--ink);
+      font: inherit;
+    }
+
+    .checkout-field input:focus {
+      outline: 2px solid var(--orange);
+      outline-offset: 1px;
+    }
+
+    .payment-options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 17px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+
+    .payment-option:hover {
+      border-color: var(--ink);
+    }
+
+    .payment-option.selected {
+      border-color: var(--ink);
+      background: var(--cream);
+    }
+
+    .payment-option input {
+      accent-color: var(--ink);
+    }
+
+    .payment-option strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .payment-option span {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .payment-fields {
+      display: none;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    .payment-fields.active {
+      display: grid;
+      gap: 16px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .order-summary {
+      background: var(--ink);
+      color: var(--white);
+      padding: 30px;
+      position: sticky;
+      top: 120px;
+    }
+
+    .order-summary h2 {
+      font-size: 22px;
+      margin-bottom: 22px;
+    }
+
+    .checkout-item {
+      display: grid;
+      grid-template-columns: 64px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,.15);
+    }
+
+    .checkout-item img {
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      background: var(--cream);
+    }
+
+    .checkout-item-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .checkout-item-meta {
+      font-size: 11px;
+      color: rgba(255,255,255,.65);
+      margin-top: 3px;
+    }
+
+    .checkout-item-price {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .checkout-total {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.2);
+    }
+
+    .checkout-total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,.75);
+    }
+
+    .checkout-total-row.final {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255,255,255,.2);
+      color: var(--white);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .checkout-error {
+      color: var(--orange);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .checkout-success {
+      text-align: center;
+      padding: 70px 20px;
+    }
+
+    .checkout-success h1 {
+      font-size: clamp(36px, 5vw, 60px);
+      margin-bottom: 15px;
+    }
+
+    .checkout-success p {
+      color: var(--ink-soft);
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 850px) {
+      .checkout-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .order-summary {
+        position: static;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .checkout-card,
+      .order-summary {
+        padding: 22px;
+      }
+
+      .field-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <span>Free UK delivery over £75 &nbsp;·&nbsp; 30-day returns</span>
+      <span class="mid">Autumn ’26 — new arrivals dropping weekly</span>
+      <span>Store: Glasgow &nbsp;·&nbsp; EN / £ GBP</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a href="index.html" class="logo" aria-label="Paceline home">PACELINE</a>
+
+      <nav class="nav" id="nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="men.html">Men</a>
+        <a href="women.html">Women</a>
+        <a href="footwear.html">Footwear</a>
+        <a href="apparel.html">Apparel</a>
+        <a href="brands.html">Brands</a>
+        <a href="accessories.html">Accessories</a>
+        <a href="sale.html">Sale</a>
+        <a href="about.html">About</a>
+        <a href="orders.html">Orders</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="cart.html" class="icon-btn" aria-label="Basket">
+          🛒
+        </a>
+
+        <button class="icon-btn menu-toggle" id="menuToggle"
+                aria-label="Menu"
+                aria-expanded="false"
+                aria-controls="nav">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="page-head">
+      <div class="wrap">
+        <p class="crumbs">
+          <a href="cart.html">Basket</a> &nbsp;/&nbsp; Checkout
+        </p>
+
+        <h1>Checkout</h1>
+
+        <p class="sub">
+          Complete your order securely.
+        </p>
+      </div>
+    </section>
+
+    <section class="checkout-section">
+      <div class="wrap">
+
+        <div class="checkout-layout">
+
+          <!-- LEFT SIDE -->
+          <div>
+
+            <!-- DELIVERY -->
+            <div class="checkout-card">
+
+              <h2>Delivery details</h2>
+
+              <form class="checkout-form" id="checkoutForm">
+
+                <div class="field-row">
+
+                  <div class="checkout-field">
+                    <label for="firstName">First name</label>
+                    <input
+                      id="firstName"
+                      name="firstName"
+                      type="text"
+                      autocomplete="given-name"
+                      required
+                    >
+                  </div>
+
+                  <div class="checkout-field">
+                    <label for="lastName">Last name</label>
+                    <input
+                      id="lastName"
+                      name="lastName"
+                      type="text"
+                      autocomplete="family-name"
+                      required
+                    >
+                  </div>
+
+                </div>
+
+                <div class="checkout-field">
+                  <label for="address">Address</label>
+                  <input
+                    id="address"
+                    name="address"
+                    type="text"
+                    autocomplete="street-address"
+                    required
+                  >
+                </div>
+
+                <div class="field-row">
+
+                  <div class="checkout-field">
+                    <label for="city">City</label>
+                    <input
+                      id="city"
+                      name="city"
+                      type="text"
+                      autocomplete="address-level2"
+                      required
+                    >
+                  </div>
+
+                  <div class="checkout-field">
+                    <label for="postcode">Postcode</label>
+                    <input
+                      id="postcode"
+                      name="postcode"
+                      type="text"
+                      autocomplete="postal-code"
+                      required
+                    >
+                  </div>
+
+                </div>
+
+                <div class="checkout-field">
+                  <label for="phone">Phone</label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    autocomplete="tel"
+                    required
+                  >
+                </div>
+
+              </form>
+
+            </div>
+
+
+            <!-- PAYMENT -->
+            <div class="checkout-card">
+
+              <h2>Payment method</h2>
+
+              <div class="payment-options">
+
+                <label class="payment-option" data-method="cod">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="Pay on Delivery"
+                    checked
+                  >
+
+                  <div>
+                    <strong>Pay on Delivery</strong>
+                    <span>Pay when your order arrives.</span>
+                  </div>
+                </label>
+
+
+                <label class="payment-option" data-method="upi">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="UPI"
+                  >
+
+                  <div>
+                    <strong>UPI</strong>
+                    <span>Pay using your UPI ID.</span>
+                  </div>
+                </label>
+
+
+                <label class="payment-option" data-method="card">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="Credit / Debit Card"
+                  >
+
+                  <div>
+                    <strong>Credit / Debit Card</strong>
+                    <span>Pay securely using your card.</span>
+                  </div>
+                </label>
+
+              </div>
+
+
+              <!-- UPI -->
+              <div class="payment-fields" id="upiFields">
+
+                <div class="checkout-field">
+                  <label for="upiId">UPI ID</label>
+
+                  <input
+                    id="upiId"
+                    type="text"
+                    placeholder="example@upi"
+                  >
+                </div>
+
+              </div>
+
+
+              <!-- CARD -->
+              <div class="payment-fields" id="cardFields">
+
+                <div class="checkout-field">
+                  <label for="cardNumber">Card number</label>
+
+                  <input
+                    id="cardNumber"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="19"
+                    placeholder="1234 5678 9012 3456"
+                  >
+                </div>
+
+                <div class="field-row">
+
+                  <div class="checkout-field">
+                    <label for="expiry">Expiry</label>
+
+                    <input
+                      id="expiry"
+                      type="text"
+                      maxlength="5"
+                      placeholder="MM/YY"
+                    >
+                  </div>
+
+                  <div class="checkout-field">
+                    <label for="cvv">CVV</label>
+
+                    <input
+                      id="cvv"
+                      type="password"
+                      inputmode="numeric"
+                      maxlength="4"
+                      placeholder="•••"
+                    >
+                  </div>
+
+                </div>
+
+              </div>
+
+              <p class="checkout-error" id="checkoutError"></p>
+
+            </div>
+
+
+            <button
+              type="submit"
+              form="checkoutForm"
+              class="btn btn-dark"
+              style="width:100%; justify-content:center;"
+            >
+              Place Order
+            </button>
+
+          </div>
+
+
+          <!-- RIGHT SIDE -->
+          <aside class="order-summary">
+
+            <h2>Your order</h2>
+
+            <div id="checkoutItems"></div>
+
+            <div class="checkout-total">
+
+              <div class="checkout-total-row">
+                <span>Subtotal</span>
+                <b id="checkoutSubtotal">£0</b>
+              </div>
+
+              <div class="checkout-total-row">
+                <span>Delivery</span>
+                <b id="checkoutShipping">£0</b>
+              </div>
+
+              <div class="checkout-total-row final">
+                <span>Total</span>
+                <span id="checkoutTotal">£0</span>
+              </div>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <script src="js/main.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/checkout.js"></script>
+
+</body>
+</html>
