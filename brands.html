@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brands— Paceline</title>
+  <meta name="description" content="Running shoes and kit for men, hand-picked by the Paceline team in Glasgow.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="brands">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M3 4h2.5l2.2 11h10.2l2.1-8H6.2"/><circle cx="9" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+</svg>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>Free UK delivery over £75 &nbsp;·&nbsp; 30-day returns</span>
+    <span class="mid">Autumn ’26 — new arrivals dropping weekly</span>
+    <span>Store: Glasgow &nbsp;·&nbsp; EN / £ GBP</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo" aria-label="Paceline home">PACELINE</a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="men.html">Men</a>
+      <a href="women.html">Women</a>
+      <a href="footwear.html">Footwear</a>
+      <a href="apparel.html">Apparel</a>
+      <a href="brands.html" aria-current="page">Brands</a>
+      <a href="accessories.html">Accessories</a>
+      <a href="sale.html">Sale</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Search"><svg><use href="#i-search"/></svg></button>
+      <button class="icon-btn" aria-label="Account"><svg><use href="#i-user"/></svg></button>
+      <button class="icon-btn" aria-label="Basket, 2 items"><svg><use href="#i-bag"/></svg><span class="cart-count">2</span></button>
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false" aria-controls="nav"><svg><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="crumbs"><a href="index.html">Home</a> &nbsp;/&nbsp; Brands</p>
+      <h1>Brands</h1>
+      <p class="sub">Every brand we stock. Pick one to see what we have in store.</p>
+    </div>
+  </section>
+
+  <section class="shop-section">
+    <div class="wrap">
+      <div class="shop-bar">
+        <div class="chips" id="brandChips" role="group" aria-label="Filter by brand"></div>
+        <div class="shop-tools">
+          <span id="resultCount" role="status"></span>
+          <label class="sr-only" for="sortSelect">Sort by</label>
+          <select id="sortSelect">
+            <option value="featured">Featured</option>
+            <option value="low">Price: low to high</option>
+            <option value="high">Price: high to low</option>
+            <option value="az">Name: A to Z</option>
+          </select>
+        </div>
+      </div>
+      <div class="product-grid" id="shopGrid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer on-dark">
+  <section class="newsletter" aria-labelledby="nl-title">
+    <div class="wrap">
+      <div>
+        <h2 id="nl-title">Join the Paceline club.</h2>
+        <p>Early access to new drops, race-day tips, and 10% off your first order.</p>
+      </div>
+      <form class="sub-form" id="subForm" novalidate>
+        <label class="sr-only" for="email">Email address</label>
+        <input id="email" type="email" placeholder="your@email.com" autocomplete="email" required>
+        <button type="submit">Subscribe</button>
+        <p class="form-msg" id="formMsg" role="status"></p>
+      </form>
+    </div>
+  </section>
+  <div class="wrap footer-cols">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">PACELINE</a>
+      <p>Race-day gear, trail-tested essentials, and everyday running kit — curated in Glasgow since 2015.</p>
+    </div>
+    <div class="footer-col"><h4>Shop</h4><ul><li><a href="men.html">Men</a></li><li><a href="women.html">Women</a></li><li><a href="footwear.html">Footwear</a></li><li><a href="apparel.html">Apparel</a></li><li><a href="brands.html">Brands</a></li><li><a href="accessories.html">Accessories</a></li><li><a href="sale.html">Sale</a></li></ul></div>
+    <div class="footer-col"><h4>Help</h4><ul><li><a href="#">Contact</a></li><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">Size Guides</a></li><li><a href="gait-analysis.html">Gait Analysis</a></li><li><a href="#">FAQs</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="https://www.visitglasgow.org.uk/">Store · Glasgow</a></li><li><a href="#">Sustainability</a></li><li><a href="#">Careers</a></li><li><a href="#">Wholesale</a></li><li><a href="#">Press</a></li></ul></div>
+    <div class="footer-col"><h4>Follow</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Strava</a></li><li><a href="#">TikTok</a></li><li><a href="#">YouTube</a></li><li><a href="#">Newsletter</a></li><li><a href="#">Blog</a></li></ul></div>
+  </div>
+  <div class="legal">
+    <div class="wrap">
+      <span>© 2026 Paceline Running Co. — All rights reserved.</span>
+      <nav aria-label="Legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a><a href="#">Accessibility</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/products.js"></script>
+</body>
+</html>

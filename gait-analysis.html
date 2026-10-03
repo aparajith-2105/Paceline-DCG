@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gait Analysis — Paceline</title>
+  <meta name="description" content="Running shoes and kit for men, hand-picked by the Paceline team in Glasgow.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="gait-analysis">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M3 4h2.5l2.2 11h10.2l2.1-8H6.2"/><circle cx="9" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+</svg>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>Free UK delivery over £75 &nbsp;·&nbsp; 30-day returns</span>
+    <span class="mid">Autumn ’26 — new arrivals dropping weekly</span>
+    <span>Store: Glasgow &nbsp;·&nbsp; EN / £ GBP</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo" aria-label="Paceline home">PACELINE</a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>  
+      <a href="men.html">Men</a>
+      <a href="women.html">Women</a>
+      <a href="footwear.html">Footwear</a>
+      <a href="apparel.html">Apparel</a>
+      <a href="brands.html">Brands</a>
+      <a href="accessories.html">Accessories</a>
+      <a href="sale.html">Sale</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Search"><svg><use href="#i-search"/></svg></button>
+      <button class="icon-btn" aria-label="Account"><svg><use href="#i-user"/></svg></button>
+      <button class="icon-btn" aria-label="Basket, 2 items"><svg><use href="#i-bag"/></svg><span class="cart-count">2</span></button>
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false" aria-controls="nav"><svg><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="crumbs"><a href="index.html">Home</a> &nbsp;/&nbsp; Gait analysis</p>
+      <h1>Book gait analysis</h1>
+      <p class="sub">A free run assessment every Saturday. Leave knowing which shoes suit the way you run.</p>
+    </div>
+  </section>
+
+  <section class="gait-section">
+    <div class="wrap gait-grid">
+
+      <div class="gait-info">
+        <h2>What to expect</h2>
+        <ol class="gait-steps">
+          <li><span class="n">1</span><div><h3>Chat</h3><p>Tell us how often you run, what you wear now and any niggles you’ve had.</p></div></li>
+          <li><span class="n">2</span><div><h3>Run</h3><p>A few minutes on our treadmill, filmed from behind and the side, so we can see how your foot lands.</p></div></li>
+          <li><span class="n">3</span><div><h3>Try</h3><p>We go through the footage with you, then bring out pairs that suit your stride to try on.</p></div></li>
+        </ol>
+
+        <h2>What to bring</h2>
+        <ul class="gait-list">
+          <li>Your current running shoes, even if they’re worn out</li>
+          <li>Running shorts or leggings you can move in</li>
+          <li>Any notes on injuries or pain</li>
+        </ul>
+
+        <h2>Where</h2>
+        <address class="gait-where"><b>Paceline Running Co.</b><br>Great Western Road, Glasgow<br>Saturdays only</address>
+      </div>
+
+      <div class="gait-card" id="bookingCard">
+        <h2>Pick a time</h2>
+
+        <form id="gaitForm" novalidate>
+          <div class="field">
+            <label for="gName">Full name</label>
+            <input id="gName" type="text" autocomplete="name">
+            <p class="err">Enter your name.</p>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="gEmail">Email</label>
+              <input id="gEmail" type="email" autocomplete="email">
+              <p class="err">Enter a valid email address.</p>
+            </div>
+            <div class="field">
+              <label for="gPhone">Phone <span class="opt">(optional)</span></label>
+              <input id="gPhone" type="tel" autocomplete="tel">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="gDate">Date <span class="opt">(Saturdays only)</span></label>
+            <input id="gDate" type="date">
+            <p class="err">Choose a Saturday.</p>
+          </div>
+
+          <fieldset class="field" id="slotField">
+            <legend>Time</legend>
+            <div class="slots">
+              <label class="slot"><input type="radio" name="slot" value="10:00"><span>10:00</span></label>
+              <label class="slot"><input type="radio" name="slot" value="10:45"><span>10:45</span></label>
+              <label class="slot"><input type="radio" name="slot" value="11:30"><span>11:30</span></label>
+              <label class="slot"><input type="radio" name="slot" value="12:15"><span>12:15</span></label>
+              <label class="slot"><input type="radio" name="slot" value="13:00"><span>13:00</span></label>
+              <label class="slot"><input type="radio" name="slot" value="13:45"><span>13:45</span></label>
+            </div>
+            <p class="err">Choose a time.</p>
+          </fieldset>
+
+          <div class="field">
+            <label for="gLevel">How often do you run?</label>
+            <select id="gLevel">
+              <option>Just starting out</option>
+              <option>A few times a month</option>
+              <option>Every week</option>
+              <option>Training for a race</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="gNotes">Injuries or notes <span class="opt">(optional)</span></label>
+            <textarea id="gNotes"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-dark">Book my analysis</button>
+          <p class="gait-note">Free. No need to buy anything.</p>
+        </form>
+
+        <div class="gait-done" id="gaitDone" role="status">
+          <div class="tick"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+          <h2>You’re booked in, <span id="doneName"></span>.</h2>
+          <p>We’ll email <b id="doneEmail"></b> to confirm.</p>
+          <dl>
+            <div><dt>Date</dt><dd id="doneDate"></dd></div>
+            <div><dt>Time</dt><dd id="doneTime"></dd></div>
+            <div><dt>Where</dt><dd>Paceline, Great Western Road</dd></div>
+          </dl>
+          <button type="button" class="btn btn-ink-outline" id="bookAnother">Book another time</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer on-dark">
+  <section class="newsletter" aria-labelledby="nl-title">
+    <div class="wrap">
+      <div>
+        <h2 id="nl-title">Join the Paceline club.</h2>
+        <p>Early access to new drops, race-day tips, and 10% off your first order.</p>
+      </div>
+      <form class="sub-form" id="subForm" novalidate>
+        <label class="sr-only" for="email">Email address</label>
+        <input id="email" type="email" placeholder="your@email.com" autocomplete="email" required>
+        <button type="submit">Subscribe</button>
+        <p class="form-msg" id="formMsg" role="status"></p>
+      </form>
+    </div>
+  </section>
+  <div class="wrap footer-cols">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">PACELINE</a>
+      <p>Race-day gear, trail-tested essentials, and everyday running kit — curated in Glasgow since 2015.</p>
+    </div>
+    <div class="footer-col"><h4>Shop</h4><ul><li><a href="men.html">Men</a></li><li><a href="women.html">Women</a></li><li><a href="footwear.html">Footwear</a></li><li><a href="apparel.html">Apparel</a></li><li><a href="brands.html">Brands</a></li><li><a href="sale.html">Sale</a></li></ul></div>
+    <div class="footer-col"><h4>Help</h4><ul><li><a href="#">Contact</a></li><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">Size Guides</a></li><li><a href="gait-analysis.html">Gait Analysis</a></li><li><a href="#">FAQs</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="https://www.visitglasgow.org.uk/">Store · Glasgow</a></li><li><a href="#">Sustainability</a></li><li><a href="#">Careers</a></li><li><a href="#">Wholesale</a></li><li><a href="#">Press</a></li></ul></div>
+    <div class="footer-col"><h4>Follow</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Strava</a></li><li><a href="#">TikTok</a></li><li><a href="#">YouTube</a></li><li><a href="#">Newsletter</a></li><li><a href="#">Blog</a></li></ul></div>
+  </div>
+  <div class="legal">
+    <div class="wrap">
+      <span>© 2026 Paceline Running Co. — All rights reserved.</span>
+      <nav aria-label="Legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a><a href="#">Accessibility</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/gait.js"></script>
+</body>
+</html>
